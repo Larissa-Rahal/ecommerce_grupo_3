@@ -11,9 +11,11 @@ import jakarta.validation.constraints.NotNull;
 public record ProdutoCadastroDTO(
 		@NotBlank(message = "A descrição não pode ser nula.")
 		String descricao,
+		@NotBlank(message = "A imagem não pode ser nula.")
+		String imagem,
 		@NotNull(message = "A quantidade de estoque não pode ser nula.")
 		Integer qtd_estoque,
-		@NotBlank(message = "A data de cadastro não pode ser nula.")
+		@NotNull(message = "A data de cadastro não pode ser nula.")
 		LocalDate dt_cadastro,
 		@NotNull(message = "O valor unitário não pode ser nulo.")
 		BigDecimal vlr_unitario,

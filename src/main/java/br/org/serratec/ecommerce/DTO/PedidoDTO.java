@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record PedidoDTO (
 		Long id,
-		@NotBlank
+		@NotNull
 		Status status,
 		@JsonIgnore
 		BigDecimal vlr_total,
@@ -30,7 +30,6 @@ public record PedidoDTO (
 		Long id_itemPedido,
 		@JsonIgnore
 		Long itemPedidoId
-//		List<Long> clientesId
 		) {
 
 	public Pedido toEntity() {

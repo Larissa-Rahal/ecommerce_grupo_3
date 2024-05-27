@@ -32,7 +32,7 @@ public class ProdutoController {
 	@Operation(summary = "Cadastrar produto",
 	description = "Serve para cadastrar um produto")
 	public ResponseEntity<ProdutoDTO> cadastrarProduto(@Valid @RequestBody ProdutoCadastroDTO produto) {
-		return new ResponseEntity<>(produtoService.cadastrarProduto(produto), HttpStatus.CREATED);
+		return new ResponseEntity<>(produtoService.gravarProdutoPorId(produto), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/id")

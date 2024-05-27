@@ -21,12 +21,12 @@ CREATE TABLE categoria(
 );
 
 CREATE TABLE pedido (
-    id serial PRIMARY KEY,
-    data_entrega date,
-    data_envio date,
-    data_pedido date,
+    id_pedido serial PRIMARY KEY,
+    dt_entrega date,
+    dt_envio date,
+    dt_pedido date,
     status varchar(255) CHECK (status IN ('AGUARDANDO_PAGAMENTO', 'PAGO', 'EM_TRANSITO', 'ENTREGUE', 'CANCELADO')),
-    valor_total numeric(38,2),
+    vlr_total numeric(38,2),
     id_cliente int,
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
@@ -44,13 +44,13 @@ CREATE TABLE produto (
 
 CREATE TABLE item_pedido (
     id_item_pedido serial PRIMARY KEY,
-    quantidade integer,
+    qnt integer,
     preco_venda numeric(38,2),
     percentual integer,
-    valor_bruto numeric(38,2),
-    valor_liquido numeric(38,2),
+    vlr_bruto numeric(38,2),
+    vlr_liquido numeric(38,2),
     id_pedido int,
     id_produto int,
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id),
+    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 );
