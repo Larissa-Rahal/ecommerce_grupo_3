@@ -28,29 +28,29 @@ public class ProdutoController {
 	private ProdutoService produtoService;	
 	
 	@PostMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar produto",
+	description = "Serve para cadastrar um produto")
 	public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoCadastroDTO produto) {
 		return new ResponseEntity<>(produtoService.cadastrarProduto(produto), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/id")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar produto por Id",
+	description = "Serve para cadastrar um produto por Id")
 	public ResponseEntity<ProdutoDTO> cadastrarProdutoPorId(@RequestBody ProdutoCadastroDTO produto) {
 		return new ResponseEntity<>(produtoService.gravarProdutoPorId(produto), HttpStatus.CREATED);
 	}
 	
 	@GetMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter todos os produtos",
+	description = "Serve para obter todos os produtos")
 	public ResponseEntity<List<ProdutoDTO>> obterTodosProdutos() {
 		return new ResponseEntity<>(produtoService.obterTodosProdutos(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}") 
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter produtos por Id",
+	description = "Serve para obter todos os produtos de um certo Id")
 	public ResponseEntity<ProdutoDTO> obterProdutoPorId(@PathVariable Long id) {
 		Optional<ProdutoDTO> dto = produtoService.obterProdutoPorId(id);
 		if (dto.isPresent()) {
@@ -60,8 +60,8 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "atualizar produto",
+	description = "Serve para atualizar o produto cadastrado")
 	public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produto) {
 		Optional<ProdutoDTO> dto = produtoService.atualizarProduto(id, produto);
 		
@@ -72,8 +72,8 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Deletar produto",
+	description = "Serve para deletar um produto ja existente")
 	public ResponseEntity<Void> removerProduto(@PathVariable Long id) {
 		if (!produtoService.excluirProduto(id)) {
 			return ResponseEntity.notFound().build();	

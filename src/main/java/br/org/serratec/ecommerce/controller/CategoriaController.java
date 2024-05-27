@@ -27,8 +27,8 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 	
 	@PostMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar categoria",
+	description = "Serve para cadastrar uma categoria")
 	public ResponseEntity<CategoriaDTO> cadastrarCategoria(@RequestBody CategoriaDTO categoria) {
 		return new ResponseEntity<>(categoriaService.cadastraCategoria(categoria), HttpStatus.CREATED);
 	}
@@ -41,8 +41,8 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter categoria por Id",
+	description = "Obter categoria por Id")
 	public ResponseEntity<CategoriaDTO> obterCategoriaPorId(@PathVariable Long id) {
 		Optional<CategoriaDTO> dto = categoriaService.obterCategoriaPorId(id);
 		if (dto.isPresent()) {
@@ -52,8 +52,8 @@ public class CategoriaController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Atualizar categoria",
+	description = "Atualizar categoria ja cadastrada")
 	public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoria) {
 		Optional<CategoriaDTO> dto = categoriaService.atualizarCategoria(id, categoria);
 		
@@ -64,8 +64,8 @@ public class CategoriaController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Remover categoria",
+	description = "Esse item remove a categoria")
 	public ResponseEntity<Void> removerCategoria(@PathVariable Long id) {
 		if (!categoriaService.excluirCategoria(id)) {
 			return ResponseEntity.notFound().build();	

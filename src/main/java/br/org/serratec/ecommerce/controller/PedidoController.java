@@ -27,23 +27,23 @@ public class PedidoController {
 	private PedidoService pedidoService;
 	
 	@PostMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastro de pedido",
+	description = "Serve para cadastrar um pedido")
 	public ResponseEntity<PedidoDTO> cadastrarPedido(@RequestBody PedidoDTO pedido) {
 		return new ResponseEntity<>(pedidoService.cadastrarPedido(pedido), HttpStatus.CREATED);
 	}
 	
 	
 	@GetMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter todos os pedidos",
+	description = "Serve para obter todos os pedidos")
 	public ResponseEntity<List<PedidoDTO>> obterTodosPedidos() {
 		return new ResponseEntity<>(pedidoService.obterTodosPedidos(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter pedido por Id",
+	description = "Serve para obter um pedido ja cadastrado por Id")
 	public ResponseEntity<PedidoDTO> obterPedidoPorId(@PathVariable Long id) {
 		Optional<PedidoDTO> dto = pedidoService.obterPedidoPorId(id);
 		if (dto.isPresent()) {
@@ -53,8 +53,8 @@ public class PedidoController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Atualizar pedido",
+	description = "Serve para atualizar um pedido ja existente")
 	public ResponseEntity<PedidoDTO> atualizarPedido(@PathVariable Long id, @RequestBody PedidoDTO pedido) {
 		Optional<PedidoDTO> dto = pedidoService.atualizarPedido(id, pedido);
 		
@@ -65,8 +65,8 @@ public class PedidoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Deletar pedido",
+	description = "Serve para deletar um pedido ja existente")
 	public ResponseEntity<Void> removerPedido(@PathVariable Long id) {
 		if (!pedidoService.excluirPedido(id)) {
 			return ResponseEntity.notFound().build();	

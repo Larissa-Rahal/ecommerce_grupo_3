@@ -31,8 +31,8 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@PostMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar Cliente",
+	description = "Serve para cadastrar um cliente")
 	public ResponseEntity<ClienteDTO> cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
 		if (clienteService.cadastraCliente(cliente) == null) {
 			return ResponseEntity.badRequest().build();
@@ -42,16 +42,16 @@ public class ClienteController {
 	
 	
 	@GetMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter todos os clientes",
+	description = "Serve para obter todos os cliente")
 	public ResponseEntity<Page<ClienteDTO>> obterTodosClientes(
 			@PageableDefault(size=10, page=0, sort="nome", direction=Sort.Direction.ASC) Pageable pageable) {
 		return new ResponseEntity<>(clienteService.obterTodosCliente(pageable), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter cliente por Id",
+	description = "Serve para chamar um cliente por Id")
 	public ResponseEntity<ClienteDTO> obterClientePorId(@PathVariable Long id) {
 		Optional<ClienteDTO> dto = clienteService.obterClientePorId(id);
 		if (dto.isPresent()) {
@@ -61,8 +61,8 @@ public class ClienteController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Atualizar cliente",
+	description = "Serve para atualizar com cliente ja cadastradp")
 	public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
 		Optional<ClienteDTO> dto = clienteService.atualizarCliente(id, cliente);
 		
@@ -73,8 +73,8 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Deletar cçiente",
+	description = "Serve para deletar um cliente cadastrado")
 	public ResponseEntity<Void> removerCliente(@PathVariable Long id) {
 		if (!clienteService.excluirCliente(id)) {
 			return ResponseEntity.notFound().build();	

@@ -28,29 +28,29 @@ public class ItemPedidoController {
 	private ItemPedidoService itempedidoService;
 	
 	@PostMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar um item pedido",
+	description = "Serve para cadastrar um item pedido")
 	public ResponseEntity<ItemPedidoDTO> cadastrarItemPedido(@RequestBody ItemPedidoCadastroDTO itemPedido) {
 		return new ResponseEntity<>(itempedidoService.cadastrarItemPedido(itemPedido), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("-id")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Cadastrar um Item Pedido",
+	description = "Serve para cadastrar um item pedido")
 	public ResponseEntity<ItemPedidoDTO> cadastrarItemPedidoPorId(@RequestBody ItemPedidoCadastroDTO itemPedido) {
 		return new ResponseEntity<>(itempedidoService.gravarItemPedidoPorId(itemPedido), HttpStatus.CREATED);
 	}
 	
 	@GetMapping
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter todos os Itens pedidos",
+	description = "Server para obter todos os itens pedidos")
 	public ResponseEntity<List<ItemPedidoDTO>> obterTodosItemPedido() {
 		return new ResponseEntity<>(itempedidoService.obterTodosItemPedido(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Obter item pedido por Id",
+	description = "Serve para obter todos os Itens pedidos")
 	public ResponseEntity<ItemPedidoDTO> obterItemPedidoPorId(@PathVariable Long id) {
 		Optional<ItemPedidoDTO> dto = itempedidoService.obterItemPedidoPorId(id);
 		if (dto.isPresent()) {
@@ -60,8 +60,8 @@ public class ItemPedidoController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Atialzar item pedido",
+	description = "Serve para atualizar um item pedido ja existente")
 	public ResponseEntity<ItemPedidoDTO> atualizarItemPedido(@PathVariable Long id, @RequestBody ItemPedidoDTO itemPedido) {
 		Optional<ItemPedidoDTO> dto = itempedidoService.atualizarItemPedido(id, itemPedido);
 		
@@ -72,8 +72,8 @@ public class ItemPedidoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@Operation(summary = "Obter todas as categorias",
-	description = "Obter todas as categorias")
+	@Operation(summary = "Deletar item Pedido",
+	description = "Serve para deletar um item pedido ja existente")
 	public ResponseEntity<Void> removerItemPedido(@PathVariable Long id) {
 		if (!itempedidoService.excluirItemPedido(id)) {
 			return ResponseEntity.notFound().build();	
