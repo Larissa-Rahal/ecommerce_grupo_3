@@ -2,7 +2,7 @@ CREATE TABLE cliente (
     id_cliente serial PRIMARY KEY,
     nome varchar(255),
     telefone varchar(255),
-    cpf varchar(255),
+    cpf varchar(15),
     dt_nasc date,
     email varchar(255),
     bairro varchar(255),
@@ -12,6 +12,12 @@ CREATE TABLE cliente (
     complemento varchar(255),    
     cidade varchar(255),
     uf varchar(255)  
+);
+
+CREATE TABLE categoria(
+    id_categoria serial PRIMARY KEY,
+    nome varchar(255),
+    descricao varchar(255)
 );
 
 CREATE TABLE pedido (
@@ -25,19 +31,13 @@ CREATE TABLE pedido (
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
-CREATE TABLE categoria(
-    id_categoria serial PRIMARY KEY,
-    nome varchar(255),
-    descricao varchar(255)
-);
-
 CREATE TABLE produto (
     id_produto serial PRIMARY KEY,
     descricao varchar(255),
-    data_cadastro date,
+    dt_cadastro date,
     imagem varchar(255),
-    quantidade_estoque integer,
-    valor_unitario numeric(38,2),
+    qtd_estoque integer,
+    vlr_unitario numeric(38,2),
     id_categoria int,
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );

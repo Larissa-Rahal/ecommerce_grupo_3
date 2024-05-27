@@ -22,7 +22,6 @@ public record ClienteCadastroDTO(
 		String cpf,
 		@NotBlank(message = "O telefone não pode ser nulo.")
 		String telefone,
-		@NotBlank(message = "O telefone não pode ser nulo.")
 		Endereco endereco,
 		@NotBlank(message = "A data de nascimento não pode ser nula.")
 		LocalDate dt_nasc,
