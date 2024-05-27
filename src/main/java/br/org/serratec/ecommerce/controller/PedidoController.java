@@ -3,6 +3,7 @@ package br.org.serratec.ecommerce.controller;
 import java.util.List;
 import java.util.Optional;
 
+import br.org.serratec.ecommerce.DTO.PedidoCadastroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class PedidoController {
 	@PostMapping
 	@Operation(summary = "Cadastro de pedido",
 	description = "Serve para cadastrar um pedido")
-	public ResponseEntity<PedidoDTO> cadastrarPedido(@Valid @RequestBody PedidoDTO pedido) {
+	public ResponseEntity<PedidoDTO> cadastrarPedido(@Valid @RequestBody PedidoCadastroDTO pedido) {
 		return new ResponseEntity<>(pedidoService.cadastrarPedido(pedido), HttpStatus.CREATED);
 	}
 	

@@ -27,10 +27,14 @@ public record ItemPedidoDTO (
 		 BigDecimal vlr_bruto,
 		 @JsonIgnore
 		 Pedido pedido,
-		 @NotNull(message = "O id do pedido não pode ser nulo.")
-		 Long pedidoId,	
-		 @NotNull(message = "O id do produto não pode ser nulo.")
-		 Long produtoId
+
+		 //@NotNull(message = "O id do pedido não pode ser nulo.")
+		 Long pedidoId,
+		
+		 //@NotNull(message = "O id do produto não pode ser nulo.")
+		 Long produtoId,
+
+		 PedidoProdutoDto produtos
 		 
 		){
 	

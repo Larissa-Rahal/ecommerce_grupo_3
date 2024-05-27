@@ -34,7 +34,7 @@ public class ItemPedido {
 	@JoinColumn(name = "id_produto")
 	private Produto produtos;	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_pedido")
 	@JsonIgnore
 	private Pedido pedido;

@@ -21,15 +21,13 @@ public record PedidoDTO (
 		Long id,
 		@NotNull
 		Status status,
-		@JsonIgnore
 		BigDecimal vlr_total,
 		@JsonIgnore
 		Cliente cliente,
 		List<ItemPedidoDTO> itemPedido,
-		Long id_cliente,
-		Long id_itemPedido,
+
 		@JsonIgnore
-		Long itemPedidoId
+		Long id_cliente
 		) {
 
 	public Pedido toEntity() {
@@ -37,7 +35,12 @@ public record PedidoDTO (
 	}
 	
 	public static PedidoDTO toDto(Pedido pedidoEntity) {
-		return Mapper.getMapper().convertValue(pedidoEntity, PedidoDTO.class);
+		//return Mapper.getMapper().convertValue(pedidoEntity, PedidoDTO.class);
+		return new PedidoDTO(pedidoEntity.getId(), pedidoEntity.getStatus(),
+				pedidoEntity.getVlr_total(), pedidoEntity.getCliente(),
+				pedidoEntity.getItem_pedido().stream()
+						.map(p -> ItemPedidoDTO.toDto(p)).toList(),
+				pedidoEntity.getCliente().getId());
 	}
 
 

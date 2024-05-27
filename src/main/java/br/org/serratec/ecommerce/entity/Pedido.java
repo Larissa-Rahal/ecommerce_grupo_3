@@ -39,7 +39,7 @@ public class Pedido {
 	@JsonIgnore
 	private BigDecimal vlr_total; //valor_total
 	
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> item_pedido;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -71,19 +71,21 @@ public class Pedido {
 		return dt_pedido;
 	}
 	public void setDt_pedido(LocalDate dt_pedido) {
-		this.dt_pedido = LocalDate.now();
+		this.dt_pedido = dt_pedido;
+		setDt_entrega(dt_pedido);
+		setDt_envio(dt_pedido);
 	}
 	public LocalDate getDt_entrega() {
 		return dt_entrega;
 	}
-	public void setDt_entrega(LocalDate dt_entrega) {
-		this.dt_entrega = LocalDate.now().plusDays(10);
+	public void setDt_entrega(LocalDate data) {
+		this.dt_entrega = data.plusDays(10);
 	}
 	public LocalDate getDt_envio() {
 		return dt_envio;
 	}
-	public void setDt_envio(LocalDate dt_envio) {
-		this.dt_envio = LocalDate.now().plusDays(3);
+	public void setDt_envio(LocalDate data) {
+		this.dt_envio = data.plusDays(3);
 	}
 	public Status getStatus() {
 		return status;
@@ -105,6 +107,7 @@ public class Pedido {
 	}
 
 	public void setItem_pedido(List<ItemPedido> item_pedido) {
+		item_pedido.forEach(i -> i.setPedido(this));
 		this.item_pedido = item_pedido;
 	}
 
@@ -116,7 +119,17 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	
-	
-
+	@Override
+	public String toString() {
+		return "Pedido{" +
+				"id=" + id +
+				", dt_pedido=" + dt_pedido +
+				", dt_entrega=" + dt_entrega +
+				", dt_envio=" + dt_envio +
+				", status=" + status +
+				", vlr_total=" + vlr_total +
+				", item_pedido=" + item_pedido +
+				", cliente=" + cliente +
+				'}';
+	}
 }

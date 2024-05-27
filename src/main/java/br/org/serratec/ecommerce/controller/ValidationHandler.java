@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
+
 public class ValidationHandler extends ResponseEntityExceptionHandler {
 	
 	@Override

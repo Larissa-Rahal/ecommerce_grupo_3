@@ -1,11 +1,13 @@
 package br.org.serratec.ecommerce.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import br.org.serratec.ecommerce.DTO.PedidoCadastroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,17 +53,23 @@ public class PedidoService {
 	}
 	
 	
-	public PedidoDTO cadastrarPedido(@RequestBody PedidoDTO pedidoDTO) {
-		Cliente cliente = clienterepositorio.findById(pedidoDTO.id_cliente()).get();
-		Pedido pedidoEntity = pedidoDTO.toEntity();
-        BigDecimal valorTotal = BigDecimal.ZERO;
-        System.out.println(pedidoEntity.getCliente()+"-----------------------------");
-        pedidoEntity.setCliente(cliente);
+	public PedidoDTO cadastrarPedido(@RequestBody PedidoCadastroDTO pedidoDTO) {
+		Optional<Cliente> cliente = clienterepositorio.findById(pedidoDTO.id_cliente());
 
-        pedidoEntity = pedidorepositorio.save(pedidoEntity);
-		
+		Pedido pedidoEntity = pedidoDTO.toEntity();
+		pedidoEntity.setCliente(cliente.get());
+		pedidoEntity.setDt_pedido(LocalDate.now());
+        BigDecimal valorTotal = BigDecimal.ZERO;
+        System.out.println(pedidoEntity.getCliente().getId() + "-----------------------------");
+
+
+		List<ItemPedido> itens = new ArrayList<>();
+
+		System.out.println(pedidoEntity);
+
 		for(ItemPedidoDTO i : pedidoDTO.itemPedido()) {
 			ItemPedido itemEntity = i.toEntity();
+			System.out.println("=======================" + i.produtoId());
 			Optional<Produto> produto = produtorepositorio.findById(i.produtoId());
 			
 			if(produto.isEmpty()) {
@@ -80,12 +88,17 @@ public class PedidoService {
 	        valorTotal = valorTotal.add(valorLiquido);
 			
 	        pedidoEntity.setVlr_total(valorTotal);
-	        itemEntity.setPedido(pedidoEntity);
+	       // itemEntity.setPedido(pedidoEntity);
 			itemEntity.setProdutos(produto.get());
 			itempedidorepositorio.save(itemEntity);
+			itens.add(itemEntity);
 		}
 
-		emailService.enviarEmailTexto(cliente.getEmail(), "Compra finalizada!",
+		pedidoEntity.setItem_pedido(itens);
+		System.out.println(pedidoEntity);
+		pedidoEntity = pedidorepositorio.save(pedidoEntity);
+
+		emailService.enviarEmailTexto(cliente.get().getEmail(), "Compra finalizada!",
                 "Você está recebendo um email de confirmação de compra!");
         
         return PedidoDTO.toDto(pedidoEntity);
