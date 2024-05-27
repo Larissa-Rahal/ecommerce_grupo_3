@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.ecommerce.DTO.ProdutoCadastroDTO;
 import br.org.serratec.ecommerce.DTO.ProdutoDTO;
 import br.org.serratec.ecommerce.service.ProdutoService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/produtos")
@@ -27,21 +28,29 @@ public class ProdutoController {
 	private ProdutoService produtoService;	
 	
 	@PostMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoCadastroDTO produto) {
 		return new ResponseEntity<>(produtoService.cadastrarProduto(produto), HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/id")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ProdutoDTO> cadastrarProdutoPorId(@RequestBody ProdutoCadastroDTO produto) {
 		return new ResponseEntity<>(produtoService.gravarProdutoPorId(produto), HttpStatus.CREATED);
 	}
 	
 	@GetMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<List<ProdutoDTO>> obterTodosProdutos() {
 		return new ResponseEntity<>(produtoService.obterTodosProdutos(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}") 
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ProdutoDTO> obterProdutoPorId(@PathVariable Long id) {
 		Optional<ProdutoDTO> dto = produtoService.obterProdutoPorId(id);
 		if (dto.isPresent()) {
@@ -51,6 +60,8 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produto) {
 		Optional<ProdutoDTO> dto = produtoService.atualizarProduto(id, produto);
 		
@@ -61,6 +72,8 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<Void> removerProduto(@PathVariable Long id) {
 		if (!produtoService.excluirProduto(id)) {
 			return ResponseEntity.notFound().build();	

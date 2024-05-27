@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.ecommerce.DTO.CategoriaDTO;
 import br.org.serratec.ecommerce.service.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/categorias")
@@ -26,16 +27,22 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 	
 	@PostMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<CategoriaDTO> cadastrarCategoria(@RequestBody CategoriaDTO categoria) {
 		return new ResponseEntity<>(categoriaService.cadastraCategoria(categoria), HttpStatus.CREATED);
 	}
 	
 	@GetMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<List<CategoriaDTO>> obterTodosCategorias() {
 		return new ResponseEntity<>(categoriaService.obterTodasCategorias(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<CategoriaDTO> obterCategoriaPorId(@PathVariable Long id) {
 		Optional<CategoriaDTO> dto = categoriaService.obterCategoriaPorId(id);
 		if (dto.isPresent()) {
@@ -45,6 +52,8 @@ public class CategoriaController {
 	}
 	
 	@PutMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoria) {
 		Optional<CategoriaDTO> dto = categoriaService.atualizarCategoria(id, categoria);
 		
@@ -55,6 +64,8 @@ public class CategoriaController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<Void> removerCategoria(@PathVariable Long id) {
 		if (!categoriaService.excluirCategoria(id)) {
 			return ResponseEntity.notFound().build();	

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.ecommerce.DTO.ClienteCadastroDTO;
 import br.org.serratec.ecommerce.DTO.ClienteDTO;
 import br.org.serratec.ecommerce.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/clientes")
@@ -30,6 +31,8 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@PostMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ClienteDTO> cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
 		if (clienteService.cadastraCliente(cliente) == null) {
 			return ResponseEntity.badRequest().build();
@@ -39,12 +42,16 @@ public class ClienteController {
 	
 	
 	@GetMapping
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<Page<ClienteDTO>> obterTodosClientes(
 			@PageableDefault(size=10, page=0, sort="nome", direction=Sort.Direction.ASC) Pageable pageable) {
 		return new ResponseEntity<>(clienteService.obterTodosCliente(pageable), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ClienteDTO> obterClientePorId(@PathVariable Long id) {
 		Optional<ClienteDTO> dto = clienteService.obterClientePorId(id);
 		if (dto.isPresent()) {
@@ -54,6 +61,8 @@ public class ClienteController {
 	}
 	
 	@PutMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO cliente) {
 		Optional<ClienteDTO> dto = clienteService.atualizarCliente(id, cliente);
 		
@@ -64,6 +73,8 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Obter todas as categorias",
+	description = "Obter todas as categorias")
 	public ResponseEntity<Void> removerCliente(@PathVariable Long id) {
 		if (!clienteService.excluirCliente(id)) {
 			return ResponseEntity.notFound().build();	

@@ -85,7 +85,7 @@ public class PedidoService {
 			itempedidorepositorio.save(itemEntity);
 		}
 
-		emailService.enviarEmailTexto(cliente.getEmail(), "Relatório de Pedido",
+		emailService.enviarEmailTexto(cliente.getEmail(), "Compra finalizada!",
                 "Você está recebendo um email de confirmação de compra!");
         
         return PedidoDTO.toDto(pedidoEntity);
