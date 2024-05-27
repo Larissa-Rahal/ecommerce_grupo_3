@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.ecommerce.DTO.CategoriaDTO;
 import br.org.serratec.ecommerce.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
@@ -29,7 +30,7 @@ public class CategoriaController {
 	@PostMapping
 	@Operation(summary = "Cadastrar categoria",
 	description = "Serve para cadastrar uma categoria")
-	public ResponseEntity<CategoriaDTO> cadastrarCategoria(@RequestBody CategoriaDTO categoria) {
+	public ResponseEntity<CategoriaDTO> cadastrarCategoria(@Valid @RequestBody CategoriaDTO categoria) {
 		return new ResponseEntity<>(categoriaService.cadastraCategoria(categoria), HttpStatus.CREATED);
 	}
 	

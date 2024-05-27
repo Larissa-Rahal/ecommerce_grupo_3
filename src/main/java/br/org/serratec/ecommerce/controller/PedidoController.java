@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.ecommerce.DTO.PedidoDTO;
 import br.org.serratec.ecommerce.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -29,7 +30,7 @@ public class PedidoController {
 	@PostMapping
 	@Operation(summary = "Cadastro de pedido",
 	description = "Serve para cadastrar um pedido")
-	public ResponseEntity<PedidoDTO> cadastrarPedido(@RequestBody PedidoDTO pedido) {
+	public ResponseEntity<PedidoDTO> cadastrarPedido(@Valid @RequestBody PedidoDTO pedido) {
 		return new ResponseEntity<>(pedidoService.cadastrarPedido(pedido), HttpStatus.CREATED);
 	}
 	

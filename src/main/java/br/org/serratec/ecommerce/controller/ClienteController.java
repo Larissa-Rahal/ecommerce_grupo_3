@@ -22,6 +22,7 @@ import br.org.serratec.ecommerce.DTO.ClienteCadastroDTO;
 import br.org.serratec.ecommerce.DTO.ClienteDTO;
 import br.org.serratec.ecommerce.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
@@ -33,7 +34,7 @@ public class ClienteController {
 	@PostMapping
 	@Operation(summary = "Cadastrar Cliente",
 	description = "Serve para cadastrar um cliente")
-	public ResponseEntity<ClienteDTO> cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
+	public ResponseEntity<ClienteDTO> cadastrarCliente(@Valid @RequestBody ClienteCadastroDTO cliente) {
 		if (clienteService.cadastraCliente(cliente) == null) {
 			return ResponseEntity.badRequest().build();
 		}

@@ -19,6 +19,7 @@ import br.org.serratec.ecommerce.DTO.ItemPedidoCadastroDTO;
 import br.org.serratec.ecommerce.DTO.ItemPedidoDTO;
 import br.org.serratec.ecommerce.service.ItemPedidoService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/carrinho")
@@ -30,7 +31,7 @@ public class ItemPedidoController {
 	@PostMapping
 	@Operation(summary = "Cadastrar um item pedido",
 	description = "Serve para cadastrar um item pedido")
-	public ResponseEntity<ItemPedidoDTO> cadastrarItemPedido(@RequestBody ItemPedidoCadastroDTO itemPedido) {
+	public ResponseEntity<ItemPedidoDTO> cadastrarItemPedido(@Valid @RequestBody ItemPedidoCadastroDTO itemPedido) {
 		return new ResponseEntity<>(itempedidoService.cadastrarItemPedido(itemPedido), HttpStatus.CREATED);
 	}
 	

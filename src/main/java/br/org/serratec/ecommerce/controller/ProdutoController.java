@@ -19,6 +19,7 @@ import br.org.serratec.ecommerce.DTO.ProdutoCadastroDTO;
 import br.org.serratec.ecommerce.DTO.ProdutoDTO;
 import br.org.serratec.ecommerce.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produtos")
@@ -30,7 +31,7 @@ public class ProdutoController {
 	@PostMapping
 	@Operation(summary = "Cadastrar produto",
 	description = "Serve para cadastrar um produto")
-	public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoCadastroDTO produto) {
+	public ResponseEntity<ProdutoDTO> cadastrarProduto(@Valid @RequestBody ProdutoCadastroDTO produto) {
 		return new ResponseEntity<>(produtoService.cadastrarProduto(produto), HttpStatus.CREATED);
 	}
 	
